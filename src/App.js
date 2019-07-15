@@ -1,23 +1,37 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import UserBoard from './components/UserBoard'
+
+class Clock extends React.Component {
+  state = {
+    date: new Date()
+  }
+
+  tick = () => {
+    this.setState({ date: new Date() })
+  }
+
+  componentDidMount(){
+    setInterval(this.tick, 1000)
+  }
+
+  render(){
+    return <h1>
+      <span>{this.state.date.getHours()}</span>
+      :
+      <span>{this.state.date.getMinutes()}</span>
+      :
+      <span>{this.state.date.getSeconds()}</span>
+    </h1>
+  }
+}
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <UserBoard />
+        <Clock />
       </header>
     </div>
   );
